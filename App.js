@@ -1,6 +1,10 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import login from './src/screens/login';
+import Login from './src/screens/Login';
+import LoginPhone from './src/screens/LoginPhone';
+import LoginPassword from './src/screens/LoginPassword';
+import In from './src/screens/TestInput';
+
 
 
 export default function App() {
@@ -8,8 +12,23 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName='Login'>
-        <Stack.Screen name="Login" component={login} options={{headerShown:false}}/>
+      <Stack.Navigator initialRouteName='LoginPassword'>
+      {/* <Stack.Screen name="In" component={In} options={{ headerShown: false }} /> */}
+        <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
+        <Stack.Screen name="LoginPhone" component={LoginPhone} options={{
+          headerTitle: '',
+          headerBackImageSource: require('./assets/back.png'),
+          headerStyle:{
+            height: 55,
+          }
+        }} />
+        <Stack.Screen name="LoginPassword" component={LoginPassword} options={{
+          headerTitle: '',
+          headerBackImageSource: require('./assets/back.png'),
+          headerStyle:{
+            height: 55,
+          }
+        }} />
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -24,8 +43,5 @@ const HomeScreen = () => {
         {/* <bottomTab.Screen name="Settings" component={Settings} /> */}
       </bottomTab.Navigator>
     </NavigationContainer>
-
-
-
   )
 }

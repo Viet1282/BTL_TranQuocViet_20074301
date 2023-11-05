@@ -1,13 +1,19 @@
-import { StatusBar } from 'expo-status-bar';
-import { Image, ImageBackground, StyleSheet, Text, TextInput, View } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { Image, ImageBackground, Pressable, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
-export default function login() {
+export default function Login() {
+    const navigation = useNavigation() ;
   return (
     <View style={styles.container}>
-      <ImageBackground style={{width:'100%',resizeMode:'cover',flex:1}} source={require('../../assets/ic_intro_new.png')}>
-        <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
-            <Text style={{fontSize:30,fontWeight:'bold',color:'black'}}>Nhập số điện thoại</Text>
-            <TextInput style={{width:300,height:50,backgroundColor:'rgba(104, 102, 102, 1)',marginTop:20,borderRadius:10,paddingLeft:10}} placeholder="Nhập số điện thoại"/>
+      <ImageBackground style={{width:'100%',resizeMode:'cover',flex:1, justifyContent:'flex-end', alignItems:'center'}} source={require('../../assets/ic_intro_new.png')}>
+        <View style={{width:'80%',gap:5,height:'16%'}}>
+            <Text style={{fontSize:22,fontWeight:'600',color:'black'}}>Nhập số điện thoại</Text>
+            <Pressable style={{width:300,height:50,borderBottom:'solid 2px rgba(0, 102, 255, 1)'}}
+            onPress={()=>{
+                navigation.navigate('LoginPhone')
+            }}>
+                            <Text style={{color:'rgba(104, 102, 102, 1)',fontSize:24,fontWeight:'bold'}}>Nhập số điện thoại</Text>
+            </Pressable>
         </View>
       </ImageBackground>
     </View>
@@ -17,7 +23,7 @@ export default function login() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    // backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
   },
