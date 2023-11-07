@@ -47,7 +47,7 @@ export default function Login() {
         <View style={styles.container}>
             <View style={{ margin: 20 }}>
                 <Text style={{ fontSize: 22, fontWeight: '700' }}>Nhập số điện thoại</Text>
-                <TextInput onChangeText={setPhone} style={{outlineColor: 'transparent', marginTop: 35, fontSize: 28, fontWeight: '600', color: 'rgba(104, 102, 102, 1)' }} placeholder='Số điện thoại của bạn'></TextInput>
+                <TextInput onChangeText={setPhone} style={{outlineColor: 'transparent', marginTop: 35, fontSize: 28, fontWeight: '600', color: 'rgba(104, 102, 102, 1)' }} placeholder='Số điện thoại của bạn' multiline={1} autoFocus={true}></TextInput>
 
             </View>
             <SafeAreaView style={styles.bottomView}>
@@ -61,6 +61,7 @@ export default function Login() {
 
                 </View>
                 <TouchableOpacity style={{ ...styles.buttonSubmit, backgroundColor:buttonSubmit}} onPress={() => {
+                    if(!checked) return;
                     navigation.navigate('LoginPassword',{phone})
                 }}>
                     <Text style={{ color: '#fff', fontSize: 17, fontWeight: '500' }}>Đồng ý và tiếp tục</Text>
