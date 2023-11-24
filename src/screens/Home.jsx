@@ -95,10 +95,10 @@ export default function Home(route) {
 
           <View style={{ flexDirection: 'row', justifyContent: 'space-around', padding: 15, alignItems: 'center' }}>
             {datatemp.map((item, index) => {
-              return <View key={index} style={{ alignItems: 'center' }}>
+              return <TouchableOpacity><View key={index} style={{ alignItems: 'center' }}>
                 <Image style={{ width: 45, height: 47 }} source={require('../../assets/' + item.img)}></Image>
                 <Text style={{ fontSize: 12, fontWeight: '500', marginTop: 5 }}>{item.text}</Text>
-              </View>
+              </View></TouchableOpacity>
             })}
           </View>
         </View>
