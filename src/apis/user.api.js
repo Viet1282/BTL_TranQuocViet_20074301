@@ -5,7 +5,7 @@ async function fetchUser(id) {
             headers: { 'content-type': 'application/json' }
         });
         if (response.ok) {
-            return response.json();
+            return await response.json();
         } else {
             throw new Error('Fetch request failed');
         }

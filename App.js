@@ -7,6 +7,7 @@ import In from './src/screens/TestInput';
 import Home from './src/screens/Home';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Image } from 'react-native';
+import Endow from './src/screens/Endow';
 // import Gif from 'react-native-gif';
 
 
@@ -53,7 +54,7 @@ const HomeScreen = () => {
           <Image style={{ height: 25, width: 25 }} source={focused?require('./assets/ic_home_active_v4.png'):require('./assets/ic_home_v4.png')}></Image>
         )
       }} />
-      <Tab.Screen name="Ưu Đãi" component={Home} options={{
+      <Tab.Screen name="Ưu Đãi" component={Endow} options={{
         tabBarIcon: ({focused}) => (
           <Image style={{ height: 25, width: 25 }} source={focused?require('./assets/ic_home_voucher_active_v4.png'):require('./assets/ic_home_voucher_v4.png')}></Image>
         ),
