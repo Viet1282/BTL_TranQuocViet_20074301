@@ -47,7 +47,8 @@ export default function Login(route) {
         if (password.length == 6) {
             for (let d of data) {
                 if (d.phone == phone && d.password == password) {
-                    navigation.navigate('Home', { screen: 'Trang Chủ', params: { id: d.id } })
+                    // navigation.navigate('Home', { screen: 'Trang Chủ', params: { id: d.id } })
+                    navigation.navigate('Home', { id: d.id })
                 } else {
 
                 }

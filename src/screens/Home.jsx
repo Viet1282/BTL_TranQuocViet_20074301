@@ -1,12 +1,12 @@
-import { useNavigation } from '@react-navigation/native';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import { FlatList, Image, ImageBackground, Pressable, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { fetchUser } from '../apis/user.api';
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
 
-export default function Home(route) {
+export default function Home({route}) {
   const navigation = useNavigation();
-  const id = route.route.params?.id;
+  const id = route.params?.id;
   // const id = 1;
   const [balance, setBalance] = useState(
     <Image style={{ width: 68, height: 8 }} source={require('../../assets/6-hide.png')}></Image>
@@ -49,6 +49,10 @@ export default function Home(route) {
   ];
   useEffect(() => {
     fetchUser(id).then(setData);
+    
+  }, [])
+
+  useEffect(()=>{
     if (pwHide) {
       setPwHideImg(require('../../assets/ic_view_svg.png'));
       setBalance(<Text style={{ fontSize: 16 }}>{data.balance + 'đ'}</Text>)
@@ -56,7 +60,7 @@ export default function Home(route) {
       setPwHideImg(require('../../assets/ic_hide_pass.png'));
       setBalance(<Image style={{ width: 68, height: 8 }} source={require('../../assets/6-hide.png')}></Image>)
     }
-  }, [pwHide])
+  },[pwHide])
   return (
     <View style={styles.container}>
       {/* <View style={{ backgroundColor: 'rgba(48, 120, 254, 1)', height: 800 }}> */}

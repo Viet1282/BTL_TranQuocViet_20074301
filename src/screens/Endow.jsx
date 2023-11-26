@@ -36,7 +36,7 @@ export default function Endow() {
                     </TouchableOpacity>
                 </View>
 
-                <View style={{ width: '100%', height: 150, flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', marginTop: 20, flexWrap: 'wrap' }}>
+                <View style={{ width: '100%', height: 150, flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', marginTop: 20,marginBottom:10, flexWrap: 'wrap' }}>
                     {tinhNang.map((item, index) => {
                         return <TouchableOpacity key={index} style={{ width: 70, height: 100, borderRadius: 8, flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-start', marginHorizontal: 10, gap: 5 }}>
                             <Image style={{ width: 50, height: 50, borderRadius: 15 }} source={item.img} />

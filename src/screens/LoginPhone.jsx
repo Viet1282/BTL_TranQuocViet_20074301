@@ -8,33 +8,6 @@ export default function Login() {
     const [checked, setChecked] = useState(false);
     const [buttonSubmit, setButtonSubmit] = useState('rgba(145, 145, 145, 1)');
     const [phone, setPhone] = useState('');
-    // useEffect(() => {
-    //     const keyboardDidShowListener = Keyboard.addListener(
-    //       'keyboardDidShow',
-    //       () => {
-    //         // Thực hiện các hành động khi bàn phím xuất hiện
-    //         console.log('Keyboard is shown');
-    //       }
-    //     );
-
-    //     const keyboardDidHideListener = Keyboard.addListener(
-    //       'keyboardDidHide',
-    //       () => {
-    //         // Thực hiện các hành động khi bàn phím ẩn đi
-    //         console.log('Keyboard is hidden');
-    //       }
-    //     );
-
-    //     // Xóa bộ lắng nghe khi không cần thiết nữa
-    //     return () => {
-    //       keyboardDidShowListener.remove();
-    //       keyboardDidHideListener.remove();
-    //     };
-    //   }, []);
-
-    //   const handleTextInputSubmit = () => {
-    //     // Xử lý sự kiện khi người dùng hoàn tất chỉnh sửa
-    // };
     useEffect(() => {
         if (checked) {
             setButtonSubmit('rgba(31, 73, 222, 0.89)')
