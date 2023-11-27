@@ -14,6 +14,10 @@ import Individual from './src/screens/Individual';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import History1 from './src/screens/History1';
 import HeaderHistory from './src/components/HeaderHistory';
+import ChuyenTien1 from './src/screens/ChuyenTien1';
+import ChuyenTien from './src/screens/ChuyenTien';
+import ChuyenTien2 from './src/screens/ChuyenTien2';
+import ChuyenTien3 from './src/screens/ChuyenTien3';
 
 
 export default function App() {
@@ -39,46 +43,50 @@ export default function App() {
           }
         }} />
         <Stack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="ChuyenTien1" component={ChuyenTien1} options={{headerShown: false}} />
+        <Stack.Screen name="ChuyenTien" component={ChuyenTien} options={{headerShown: false}} />
+        <Stack.Screen name="ChuyenTien2" component={ChuyenTien2} options={{headerShown: false}} />
+        <Stack.Screen name="ChuyenTien3" component={ChuyenTien3} options={{headerShown: false}} />
       </Stack.Navigator>
     </NavigationContainer>
   );
 }
 
-const HomeScreen = (route) => {
-  const Tab = createBottomTabNavigator();
-  const id = route.route.params?.id;
+const HomeScreen = ({route}) => {
+  const id = route.params?.id;
   console.log(id);
+  const Tab = createBottomTabNavigator();
   return (
     <Tab.Navigator initialRouteName='Trang Chủ' screenOptions={{
       tabBarStyle: { backgroundColor: 'white', justifyContent: 'space-between', height: 63 },
       tabBarLabelStyle: { fontSize: 12, fontWeight: '700', marginBottom: 5 },
       headerShown: false,
     }}>
-      <Tab.Screen name="Trang Chủ" component={Home} initialParams={{ id }} options={{
+      <Tab.Screen name="Trang Chủ" component={Home} options={{
         tabBarIcon: ({ focused }) => (
           <Image style={{ height: 25, width: 25 }} source={focused ? require('./assets/ic_home_active_v4.png') : require('./assets/ic_home_v4.png')}></Image>
         )
       }} />
-      <Tab.Screen name="Ưu Đãi" component={Endow} initialParams={{ id }} options={{
+      <Tab.Screen name="Ưu Đãi" component={Endow} options={{
         header: HeaderEndow,
         headerShown: true,
         tabBarIcon: ({ focused }) => (
           <Image style={{ height: 25, width: 25 }} source={focused ? require('./assets/ic_home_voucher_active_v4.png') : require('./assets/ic_home_voucher_v4.png')}></Image>
         ),
       }} />
-      <Tab.Screen name="Quét Mã QR" component={Home} initialParams={{ id }} options={{
+      <Tab.Screen name="Quét Mã QR" component={Home} options={{
         tabBarIcon: ({ focused }) => (
           <Image style={{ height: 65, width: 65, borderRadius: 40, bottom: 23 }} source={focused ? require('./assets/uiv3_scan_qr.gif') : require('./assets/uiv3_scan_qr.gif')}></Image>
         )
       }} />
-      <Tab.Screen name="Lịch Sử" component={HistoryScreen} initialParams={{ id }} options={{
+      <Tab.Screen name="Lịch Sử" component={HistoryScreen} initialParams={{id}} options={{
         header: HeaderHistory,
         headerShown: true,
         tabBarIcon: ({ focused }) => (
           <Image style={{ height: 25, width: 25 }} source={focused ? require('./assets/ic_home_history_active_v4.png') : require('./assets/ic_home_history_v4.png')}></Image>
         )
       }} />
-      <Tab.Screen name="Cá Nhân" component={Individual} initialParams={{ id }} options={{
+      <Tab.Screen name="Cá Nhân" component={Individual} options={{
         tabBarIcon: ({ focused }) => (
           <Image style={{ height: 25, width: 25 }} source={focused ? require('./assets/ic_home_account_active_v4.png') : require('./assets/ic_home_account_v4.png')}></Image>
         )
@@ -87,17 +95,17 @@ const HomeScreen = (route) => {
   )
 }
 
-const HistoryScreen = (route) => {
+const HistoryScreen = ({route}) => {
   const Tab = createMaterialTopTabNavigator();
-  const id = route.route.params?.id;
+  const id = route.params?.id;
   console.log(id);
   return (
     <Tab.Navigator initialRouteName='Giao Dịch' screenOptions={{
         tabBarLabelStyle: { fontSize: 15, fontWeight: '700'},
       }} >
-      <Tab.Screen name="Giao Dịch" initialParams={{id}} component={History1}  />
-      <Tab.Screen name="Thống Kê" component={History1} />
-      <Tab.Screen name="Sao Kê" component={History1} />
+      <Tab.Screen name="Giao Dịch" component={History1} initialParams={{id}}  />
+      <Tab.Screen name="Thống Kê" component={History1} initialParams={{id}}/>
+      <Tab.Screen name="Sao Kê" component={History1} initialParams={{id}}/>
     </Tab.Navigator>
   )
 }

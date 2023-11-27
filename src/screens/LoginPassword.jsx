@@ -3,6 +3,7 @@ import { Image, ImageBackground, Keyboard, SafeAreaView, StyleSheet, Text, TextI
 import { CheckBox } from '@rneui/themed';
 import { useState, useEffect, useRef } from 'react';
 import { fetchUsers } from '../apis/users.api';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Login(route) {
     const navigation = useNavigation();
@@ -24,6 +25,12 @@ export default function Login(route) {
     // useEffect(() => {
 
     // }, [])
+
+    const handleLogin = async (user) => {
+        await AsyncStorage.setItem('user', JSON.stringify(user));
+        await AsyncStorage.setItem('userId', user.id);
+        navigation.navigate('Home',{id:user.id});
+      };
     console.log(data);
     useEffect(() => {
         fetchUsers().then(setData);
@@ -48,7 +55,8 @@ export default function Login(route) {
             for (let d of data) {
                 if (d.phone == phone && d.password == password) {
                     // navigation.navigate('Home', { screen: 'Trang Chủ', params: { id: d.id } })
-                    navigation.navigate('Home', { id: d.id })
+                    // navigation.navigate('Home', { id: d.id })
+                    handleLogin(d);
                 } else {
 
                 }

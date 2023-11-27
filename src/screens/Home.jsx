@@ -3,10 +3,12 @@ import { FlatList, Image, ImageBackground, Pressable, ScrollView, StyleSheet, Te
 import { fetchUser } from '../apis/user.api';
 import React, { useEffect } from 'react';
 import { useState } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Home({route}) {
   const navigation = useNavigation();
-  const id = route.params?.id;
+  // const id = route.params?.id;
+
   // const id = 1;
   const [balance, setBalance] = useState(
     <Image style={{ width: 68, height: 8 }} source={require('../../assets/6-hide.png')}></Image>
@@ -17,10 +19,10 @@ export default function Home({route}) {
   // DataApi
   const [data, setData] = useState([]);
   const datatemp = [
-    { img: 'ic_home_cashin.png', text: 'Nạp tiền' },
-    { img: 'ic_home_withdraw.png', text: 'Rút tiền' },
-    { img: 'ic_home_transfer_money.png', text: 'Chuyển tiền' },
-    { img: 'ic_home_voucher.png', text: 'Ưu đãi' }
+    { img: 'ic_home_cashin.png', text: 'Nạp tiền', screen:''},
+    { img: 'ic_home_withdraw.png', text: 'Rút tiền', screen:'' },
+    { img: 'ic_home_transfer_money.png', text: 'Chuyển tiền', screen:'ChuyenTien' },
+    { img: 'ic_home_voucher.png', text: 'Ưu đãi', screen:'' }
   ];
   const datatemp2 = [
     { img: 'ic_topup_new.gif', text: 'Nạp điện thoại' },
@@ -48,10 +50,15 @@ export default function Home({route}) {
     { img: 'Uudai1 2.png', text: 'Hoàn 30.000đ nạp tài khoản VETC, ePass trên ...' },
   ];
   useEffect(() => {
-    fetchUser(id).then(setData);
-    
+    // fetchUser(id).then(setData);
+    const getStoredUser = async () => {
+      const storedUser = await AsyncStorage.getItem('user');
+      console.log(storedUser);
+      setData(JSON.parse(storedUser));
+    };
+    getStoredUser();
   }, [])
-
+  console.log(data);
   useEffect(()=>{
     if (pwHide) {
       setPwHideImg(require('../../assets/ic_view_svg.png'));
@@ -99,7 +106,9 @@ export default function Home({route}) {
 
           <View style={{ flexDirection: 'row', justifyContent: 'space-around', padding: 15, alignItems: 'center' }}>
             {datatemp.map((item, index) => {
-              return <TouchableOpacity><View key={index} style={{ alignItems: 'center' }}>
+              return <TouchableOpacity onPress={()=>{
+                navigation.replace(item.screen);
+              }}><View key={index} style={{ alignItems: 'center' }}>
                 <Image style={{ width: 45, height: 47 }} source={require('../../assets/' + item.img)}></Image>
                 <Text style={{ fontSize: 12, fontWeight: '500', marginTop: 5 }}>{item.text}</Text>
               </View></TouchableOpacity>

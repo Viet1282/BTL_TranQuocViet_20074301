@@ -3,18 +3,25 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { Image, ImageBackground, Pressable, ScrollView, StyleSheet, Switch, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { fetchUser } from '../apis/user.api';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export default function Individual(route) {
-    const id = route.route.params?.id;
+export default function Individual() {
+    // const id = route.route.params?.id;
     // const id = 1;
     const navigation = useNavigation();
     const [user, setUser] = useState([]);
     const [isEnabled, setIsEnabled] = useState(false);
-    const [isEnabled2, setIsEnabled2] = useState(false);
+    const [isEnabled2, setIsEnabled2] = useState(true);
     const toggleSwitch = () => setIsEnabled(previousState => !previousState);
     const toggleSwitch2 = () => setIsEnabled2(previousState => !previousState);
     useEffect(() => {
-        fetchUser(id).then(setUser);
+        // fetchUser(id).then(setUser);
+        const getStoredUser = async () => {
+            const storedUser = await AsyncStorage.getItem('user');
+            console.log(storedUser);
+            setUser(JSON.parse(storedUser));
+        };
+        getStoredUser();
     }, [])
 
     const tinhNang = [
@@ -48,34 +55,34 @@ export default function Individual(route) {
 
                     <View style={{ flexDirection: 'row', alignContent: 'space-between', width: '100%', height: 60, alignItems: 'center', gap: 10 }}>
                         <Image style={{ width: 30, height: 30 }} source={require('../../assets/ic_face_id_auth 1.png')} />
-                        <View style={{width:'70%'}}>
+                        <View style={{ width: '70%' }}>
                             <Text style={{ fontWeight: '700', fontSize: 15 }}>Xác thực sinh trắc học</Text>
                             <Text style={{ fontWeight: '400', fontSize: 13 }}>Khi đăng nhập và thanh toán</Text>
                         </View>
                         <Switch
-                                trackColor={{ false: '#767577', true: '#81b0ff' }}
-                                thumbColor={isEnabled ? '#f5dd4b' : '#f4f3f4'}
-                                ios_backgroundColor="#3e3e3e"
-                                onValueChange={toggleSwitch}
-                                value={isEnabled}
-                            />
+                            trackColor={{ false: '#767577', true: '#81b0ff' }}
+                            thumbColor={isEnabled ? '#f5dd4b' : '#f4f3f4'}
+                            ios_backgroundColor="#3e3e3e"
+                            onValueChange={toggleSwitch}
+                            value={isEnabled}
+                        />
                     </View>
 
-                    <View style={{ width: '88%',marginLeft:'10%', height: 2, backgroundColor:'rgba(0, 0, 0, 0.2)'}}></View>
+                    <View style={{ width: '88%', marginLeft: '10%', height: 2, backgroundColor: 'rgba(0, 0, 0, 0.2)' }}></View>
 
                     <View style={{ flexDirection: 'row', alignContent: 'space-between', width: '100%', height: 60, alignItems: 'center', gap: 10 }}>
                         <Image style={{ width: 30, height: 30 }} source={require('../../assets/ic_face_id_auth 1 (1).png')} />
-                        <View style={{width:'70%'}}>
+                        <View style={{ width: '70%' }}>
                             <Text style={{ fontWeight: '700', fontSize: 15 }}>Thanh toán nhanh</Text>
-                            <Text style={{ fontWeight: '400', fontSize: 13 }}>Bỏ qua OTP khi xác thực và thanh toán</Text>
+                            <Text style={{ fontWeight: '400', fontSize: 13 }}>Bỏ qua OTP với các giao dịch dưới 300.000đ</Text>
                         </View>
                         <Switch
-                                trackColor={{ false: '#767577', true: '#81b0ff' }}
-                                thumbColor={isEnabled2 ? '#f5dd4b' : '#f4f3f4'}
-                                ios_backgroundColor="#3e3e3e"
-                                onValueChange={toggleSwitch2}
-                                value={isEnabled2}
-                            />
+                            trackColor={{ false: '#767577', true: '#81b0ff' }}
+                            thumbColor={isEnabled2 ? '#f5dd4b' : '#f4f3f4'}
+                            ios_backgroundColor="#3e3e3e"
+                            onValueChange={toggleSwitch2}
+                            value={isEnabled2}
+                        />
                     </View>
                 </View>
                 <View style={{ width: 'auto', height: 285, justifyContent: 'flex-start', alignItems: 'flex-start', marginTop: 15, marginHorizontal: 10, paddingHorizontal: 14, paddingVertical: 6, backgroundColor: 'white', borderRadius: 10 }}>
@@ -83,35 +90,35 @@ export default function Individual(route) {
 
                     <View style={{ flexDirection: 'row', alignContent: 'space-between', width: '100%', height: 50, alignItems: 'center', gap: 10 }}>
                         <Image style={{ width: 30, height: 30 }} source={require('../../assets/ic_face_id_auth 1 (2).png')} />
-                        <Text style={{ fontWeight: '400', fontSize: 13 }}>Thông tin tài khoản</Text>                        
+                        <Text style={{ fontWeight: '400', fontSize: 13 }}>Thông tin tài khoản</Text>
                     </View>
 
-                    <View style={{ width: '88%',marginLeft:'10%', height: 2, backgroundColor:'rgba(0, 0, 0, 0.2)'}}></View>
+                    <View style={{ width: '88%', marginLeft: '10%', height: 2, backgroundColor: 'rgba(0, 0, 0, 0.2)' }}></View>
 
                     <View style={{ flexDirection: 'row', alignContent: 'space-between', width: '100%', height: 50, alignItems: 'center', gap: 10 }}>
                         <Image style={{ width: 30, height: 30 }} source={require('../../assets/ic_face_id_auth 1 (3).png')} />
-                        <Text style={{ fontWeight: '400', fontSize: 13 }}>Ngân hàng liên kết</Text>   
+                        <Text style={{ fontWeight: '400', fontSize: 13 }}>Ngân hàng liên kết</Text>
                     </View>
 
-                    <View style={{ width: '88%',marginLeft:'10%', height: 2, backgroundColor:'rgba(0, 0, 0, 0.2)'}}></View>
+                    <View style={{ width: '88%', marginLeft: '10%', height: 2, backgroundColor: 'rgba(0, 0, 0, 0.2)' }}></View>
 
                     <View style={{ flexDirection: 'row', alignContent: 'space-between', width: '100%', height: 50, alignItems: 'center', gap: 10 }}>
                         <Image style={{ width: 30, height: 30 }} source={require('../../assets/ic_face_id_auth 1 (4).png')} />
-                        <Text style={{ fontWeight: '400', fontSize: 13 }}>Theo dõi hóa đơn</Text>   
+                        <Text style={{ fontWeight: '400', fontSize: 13 }}>Theo dõi hóa đơn</Text>
                     </View>
 
-                    <View style={{ width: '88%',marginLeft:'10%', height: 2, backgroundColor:'rgba(0, 0, 0, 0.2)'}}></View>
+                    <View style={{ width: '88%', marginLeft: '10%', height: 2, backgroundColor: 'rgba(0, 0, 0, 0.2)' }}></View>
 
                     <View style={{ flexDirection: 'row', alignContent: 'space-between', width: '100%', height: 50, alignItems: 'center', gap: 10 }}>
                         <Image style={{ width: 30, height: 30 }} source={require('../../assets/ic_face_id_auth 1 (5).png')} />
-                        <Text style={{ fontWeight: '400', fontSize: 13 }}>Thanh toán tự động</Text>   
+                        <Text style={{ fontWeight: '400', fontSize: 13 }}>Thanh toán tự động</Text>
                     </View>
 
-                    <View style={{ width: '88%',marginLeft:'10%', height: 2, backgroundColor:'rgba(0, 0, 0, 0.2)'}}></View>
+                    <View style={{ width: '88%', marginLeft: '10%', height: 2, backgroundColor: 'rgba(0, 0, 0, 0.2)' }}></View>
 
                     <View style={{ flexDirection: 'row', alignContent: 'space-between', width: '100%', height: 50, alignItems: 'center', gap: 10 }}>
                         <Image style={{ width: 30, height: 30 }} source={require('../../assets/ic_face_id_auth 1 (6).png')} />
-                        <Text style={{ fontWeight: '400', fontSize: 13 }}>Mở khóa tài khoản ngân hàng</Text>   
+                        <Text style={{ fontWeight: '400', fontSize: 13 }}>Mở khóa tài khoản ngân hàng</Text>
                     </View>
                 </View>
 
@@ -120,7 +127,7 @@ export default function Individual(route) {
 
                     <View style={{ flexDirection: 'row', alignContent: 'space-between', width: '100%', height: 50, alignItems: 'center', gap: 10 }}>
                         <Image style={{ width: 30, height: 30 }} source={require('../../assets/ic_face_id_auth 1 (9).png')} />
-                        <Text style={{ fontWeight: '400', fontSize: 13 }}>Đăng kí điểm chấp nhận thanh toán</Text>                        
+                        <Text style={{ fontWeight: '400', fontSize: 13 }}>Đăng kí điểm chấp nhận thanh toán</Text>
                     </View>
 
                 </View>
@@ -130,31 +137,38 @@ export default function Individual(route) {
 
                     <View style={{ flexDirection: 'row', alignContent: 'space-between', width: '100%', height: 50, alignItems: 'center', gap: 10 }}>
                         <Image style={{ width: 30, height: 30 }} source={require('../../assets/ic_face_id_auth 1 (10).png')} />
-                        <Text style={{ fontWeight: '400', fontSize: 13 }}>Chia sẻ bạn bè</Text>                        
+                        <Text style={{ fontWeight: '400', fontSize: 13 }}>Chia sẻ bạn bè</Text>
                     </View>
 
-                    <View style={{ width: '88%',marginLeft:'10%', height: 2, backgroundColor:'rgba(0, 0, 0, 0.2)'}}></View>
+                    <View style={{ width: '88%', marginLeft: '10%', height: 2, backgroundColor: 'rgba(0, 0, 0, 0.2)' }}></View>
 
                     <View style={{ flexDirection: 'row', alignContent: 'space-between', width: '100%', height: 50, alignItems: 'center', gap: 10 }}>
                         <Image style={{ width: 30, height: 30 }} source={require('../../assets/ic_face_id_auth 1 (7).png')} />
-                        <Text style={{ fontWeight: '400', fontSize: 13 }}>Điều khoản sử dụng</Text>   
+                        <Text style={{ fontWeight: '400', fontSize: 13 }}>Điều khoản sử dụng</Text>
                     </View>
 
-                    <View style={{ width: '88%',marginLeft:'10%', height: 2, backgroundColor:'rgba(0, 0, 0, 0.2)'}}></View>
+                    <View style={{ width: '88%', marginLeft: '10%', height: 2, backgroundColor: 'rgba(0, 0, 0, 0.2)' }}></View>
 
                     <View style={{ flexDirection: 'row', alignContent: 'space-between', width: '100%', height: 50, alignItems: 'center', gap: 10 }}>
                         <Image style={{ width: 30, height: 30 }} source={require('../../assets/ic_face_id_auth 1 (7).png')} />
-                        <Text style={{ fontWeight: '400', fontSize: 13 }}>Đổi mật khẩu</Text>   
+                        <Text style={{ fontWeight: '400', fontSize: 13 }}>Đổi mật khẩu</Text>
                     </View>
 
-                    <View style={{ width: '88%',marginLeft:'10%', height: 2, backgroundColor:'rgba(0, 0, 0, 0.2)'}}></View>
+                    <View style={{ width: '88%', marginLeft: '10%', height: 2, backgroundColor: 'rgba(0, 0, 0, 0.2)' }}></View>
+                    <TouchableOpacity
+                        onPress={() => {
+                            AsyncStorage.removeItem('user');
+                            navigation.navigate('Login');
+                        }}
+                    > 
+                        <View style={{ flexDirection: 'row', alignContent: 'space-between', width: '100%', height: 50, alignItems: 'center', gap: 10 }}>
+                            <Image style={{ width: 30, height: 30 }} source={require('../../assets/ic_face_id_auth 1 (8).png')} />
+                            <Text style={{ fontWeight: '400', fontSize: 13 }}>Đăng xuất</Text>
+                        </View>
+                    </TouchableOpacity>
 
-                    <View style={{ flexDirection: 'row', alignContent: 'space-between', width: '100%', height: 50, alignItems: 'center', gap: 10 }}>
-                        <Image style={{ width: 30, height: 30 }} source={require('../../assets/ic_face_id_auth 1 (8).png')} />
-                        <Text style={{ fontWeight: '400', fontSize: 13 }}>Đăng xuất</Text>   
-                    </View>
                 </View>
-                <Text style={{textAlign:'center',marginTop:20, marginBottom:60}}>Phiên bản 1.1.6.9</Text>
+                <Text style={{ textAlign: 'center', marginTop: 20, marginBottom: 60 }}>Phiên bản 1.1.6.9</Text>
 
 
             </ScrollView>
