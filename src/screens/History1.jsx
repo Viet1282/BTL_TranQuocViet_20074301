@@ -12,7 +12,6 @@ export default function History1(route) {
     const groupByMonthAndYear = (dataList) => {
         const groups = new Map();
         dataList.forEach((item) => {
-            // Tạo khóa dựa trên tháng và năm
             const key = `${item.month}-${item.year}`;
             // Kiểm tra xem nhóm đã tồn tại hay chưa
             if (!groups.has(key)) {
