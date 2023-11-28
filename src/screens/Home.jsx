@@ -32,9 +32,9 @@ export default function Home({route}) {
   ];
   const dataDV = [
     { img: 'ic_vnedu 1.png', text: 'Học phí VnEdu' },
-    { img: 'ic_vnedu 1.png', text: 'VnEdu' },
-    { img: 'ic_vnedu 1.png', text: 'VnEdu' },
-    { img: 'ic_vnedu 1.png', text: 'VnEdu' },
+    { img: 'tiki.png', text: 'Tiki' },
+    { img: 'homecredit.png', text: 'Home Credit' },
+    { img: 'logo-vietlott-300x300.jpg', text: 'Vietlott' },
     { img: 'ic_vnedu 1.png', text: 'VnEdu' },
     { img: 'ic_vnedu 1.png', text: 'VnEdu' },
   ];

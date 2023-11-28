@@ -132,7 +132,30 @@ export default function ChuyenTien2() {
                     }).catch(error => {
                         // handle error
                     })
-
+                    const newTransaction2 = {
+                        "title": `Nhận tiền từ ${user.lastName} ${user.middleName} ${user.name}`,
+                        "amount": parseInt(amount),
+                        "time": `${currentTime.getHours()}:${currentTime.getMinutes()}`,
+                        "day": currentTime.getDate(),
+                        "month": currentTime.getMonth() + 1,
+                        "year": currentTime.getFullYear(),
+                        "code": "NHANTIEN",
+                    };
+                    console.log(newTransaction);
+                    fetch(`https://6549dd1de182221f8d52037f.mockapi.io/user/${item.id}/Transaction`, {
+                        method: 'POST',
+                        headers: { 'content-type': 'application/json' },
+                        body: JSON.stringify(newTransaction2)
+                    }).then(res => {
+                        if (res.ok) {
+                            return res.json();
+                        }
+                        // handle error
+                    }).then(task => {
+                        // do something with the new task
+                    }).catch(error => {
+                        // handle error
+                    })
                     handleHoanThanh(user,item,amount);
                 }}>
                     <Text style={{ color: '#fff', fontSize: 17, fontWeight: '500' }}>Chuyển tiền</Text>

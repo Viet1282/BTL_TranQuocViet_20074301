@@ -107,7 +107,7 @@ export default function History1({ route }) {
                 </ScrollView>
             </View>
             <ScrollView style={{ width: '100%' }}>
-                {data.map((group, groupIndex) => {
+                {data.reverse().map((group, groupIndex) => {
                     return (
                         <View key={groupIndex} style={{ alignItems: 'center' }}>
                             <View style={{ width: '100%', height: 62, backgroundColor: 'rgba(19, 120, 213, 0.1)', flexDirection: 'row', justifyContent: 'space-between', padding: 10, alignItems: 'center', marginTop: 10 }}>

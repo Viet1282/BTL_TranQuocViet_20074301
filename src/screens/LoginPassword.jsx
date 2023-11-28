@@ -4,6 +4,7 @@ import { CheckBox } from '@rneui/themed';
 import { useState, useEffect, useRef } from 'react';
 import { fetchUsers } from '../apis/users.api';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { fetchUserLogin } from '../apis/userlogin.api';
 
 export default function Login(route) {
     const navigation = useNavigation();
@@ -19,22 +20,21 @@ export default function Login(route) {
     const [pwHideImg, setPwHideImg] = useState(require('../../assets/ic_hide_pass.png'));
     const phone = route.route.params?.phone;
     const [password, setPassword] = useState('');
+    const [user,setUser] = useState([]);
     console.log(phone);
     const [data, setData] = useState([]);
 
     // useEffect(() => {
-
+        
     // }, [])
-
     const handleLogin = async (user) => {
         await AsyncStorage.setItem('user', JSON.stringify(user));
         await AsyncStorage.setItem('userId', user.id);
-        navigation.navigate('Home',{id:user.id});
-      };
-    console.log(data);
-    useEffect(() => {
-        fetchUsers().then(setData);
+        navigation.navigate('Home', { id: user.id });
+    };
 
+    useEffect(() => {
+        fetchUserLogin(phone).then(setUser);
         let ic_char_temp = {};
         for (let i = 0; i < 6; i++) {
             if (i < password.length && pwHide) {
@@ -52,18 +52,35 @@ export default function Login(route) {
         setChar5(ic_char_temp.ic5);
         setChar6(ic_char_temp.ic6);
         if (password.length == 6) {
-            for (let d of data) {
-                if (d.phone == phone && d.password == password) {
+            for (let d of user) {
+                if (d.password == password) {
                     // navigation.navigate('Home', { screen: 'Trang Chủ', params: { id: d.id } })
                     // navigation.navigate('Home', { id: d.id })
                     handleLogin(d);
                 } else {
-
+                setChar1(<View style={{backgroundColor:'red',height:23,width:23,borderRadius:40}}></View>);
+                setChar2(<View style={{backgroundColor:'red',height:23,width:23,borderRadius:40}}></View>);
+                setChar3(<View style={{backgroundColor:'red',height:23,width:23,borderRadius:40}}></View>);
+                setChar4(<View style={{backgroundColor:'red',height:23,width:23,borderRadius:40}}></View>);
+                setChar5(<View style={{backgroundColor:'red',height:23,width:23,borderRadius:40}}></View>);
+                setChar6(<View style={{backgroundColor:'red',height:23,width:23,borderRadius:40}}></View>);
                 }
             }
+
+            // if(user[0].password === password){
+            //         handleLogin(user[0]);
+            // }else{
+            //     setChar1(<View style={{backgroundColor:'red',height:23,width:23,borderRadius:40}}></View>);
+            //     setChar2(<View style={{backgroundColor:'red',height:23,width:23,borderRadius:40}}></View>);
+            //     setChar3(<View style={{backgroundColor:'red',height:23,width:23,borderRadius:40}}></View>);
+            //     setChar4(<View style={{backgroundColor:'red',height:23,width:23,borderRadius:40}}></View>);
+            //     setChar5(<View style={{backgroundColor:'red',height:23,width:23,borderRadius:40}}></View>);
+            //     setChar6(<View style={{backgroundColor:'red',height:23,width:23,borderRadius:40}}></View>);
+            // }
             setButtonSubmit('rgba(31, 73, 222, 0.89)')
-        } else
+        } else 
             setButtonSubmit('rgba(145, 145, 145, 1)')
+        
         if (pwHide) {
             setPwHideImg(require('../../assets/ic_hide_pass.png'));
             inputRef.current.focus();
@@ -71,11 +88,7 @@ export default function Login(route) {
             setPwHideImg(require('../../assets/ic_view_svg.png'));
             inputRef.current.focus();
         }
-    }, [password, pwHide]);
-
-
-
-
+    }, [password, pwHide, user]);
 
     return (
         <View style={styles.container}>

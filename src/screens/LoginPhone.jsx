@@ -8,6 +8,7 @@ export default function Login() {
     const [checked, setChecked] = useState(false);
     const [buttonSubmit, setButtonSubmit] = useState('rgba(145, 145, 145, 1)');
     const [phone, setPhone] = useState('');
+    const [user, setUser] = useState({});
     useEffect(() => {
         if (checked) {
             setButtonSubmit('rgba(31, 73, 222, 0.89)')
